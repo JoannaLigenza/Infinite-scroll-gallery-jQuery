@@ -3,6 +3,34 @@
 	box-sizing: border-box;
 }
 
+body {
+	margin: 0;
+}
+
+#container {
+	position: relative;
+}
+
+header {
+	padding: 20px 0;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+}
+
+.in-header-div {
+	flex: 1;
+	max-width: 1220px;
+}
+
+.arrow-down {
+	margin-left: 20px;
+}
+
+.arrow-up {
+	margin-right: 20px;
+}
+
 h2 {
 	text-align: center;
 }
@@ -51,4 +79,9 @@ h2 {
 		height: 200px;
 		width: auto;
 	}
+}
+
+.sticky {
+	position: sticky;
+	top: 0;
 }
