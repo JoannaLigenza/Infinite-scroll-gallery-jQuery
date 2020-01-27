@@ -1,0 +1,24 @@
+
+* {
+	box-sizing: border-box;
+}
+
+h2 {
+	text-align: center;
+}
+
+#select-view {
+	width: 80%;
+	padding: 10px;
+	display: block;
+	margin: 0 auto;
+}
+
+#select-view:focus {
+	outline: none;
+	border: 1px solid rgb(62, 5, 168);
+}
+
+.gallery {
+	max-width: 1200px;
+}
