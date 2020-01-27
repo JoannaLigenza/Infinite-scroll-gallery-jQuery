@@ -19,6 +19,36 @@ h2 {
 	border: 1px solid rgb(62, 5, 168);
 }
 
-.gallery {
-	max-width: 1200px;
+#gallery {
+	max-width: 1220px;
+	margin: 30px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.image-container {
+	display: inline-block;
+}
+
+.image-container img {
+	max-width: 400px;
+	height: auto;
+}
+
+@media screen and (min-width: 700px) {
+	#gallery {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.image-container {
+		margin: 10px 0;
+	}
+
+	.image-container img {
+		height: 200px;
+		width: auto;
+	}
 }
