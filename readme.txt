@@ -1,0 +1,1 @@
+Gallery use demo version of unsplash api. Demo apps are limited to 50 requests per hour, so if you don't see gallery images, wait 5 minutes and try again.
