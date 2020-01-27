@@ -8,7 +8,8 @@ $(document).ready(function() {
         page += 1;
         let client_id;
         let query;
-        $.get(`https://api.unsplash.com/search/photos?query=office&page=${page}&per_page=${per_page}&client_id=c951c92d1564486e8f5adc62ca1fe0f9b05da1800d121fdf1ec049363936cd4c`)
+        const selectedValue = $("#select-view option:selected" ).text();
+        $.get(`https://api.unsplash.com/search/photos?query=${selectedValue}&page=${page}&per_page=${per_page}&client_id=c951c92d1564486e8f5adc62ca1fe0f9b05da1800d121fdf1ec049363936cd4c`)
         .done(function(resp) {
             for (let i=0; i< resp.results.length; i++) {
                 const image = resp.results[i];
@@ -16,7 +17,8 @@ $(document).ready(function() {
             }
         })
         .fail(function() {
-            console.log("Wystąpił błąd w połączeniu");
+            // console.log('connection error');
+            // $("#gallery").innerText = "There's a connection error, please try again in 10 minutes";
         })
         .always(function() {
             // console.log('always')
@@ -37,6 +39,14 @@ $(document).ready(function() {
         });
     }
 	LoadMoreImages();
+
+    const selectChange = () => {
+        $("#select-view").change(function() {
+            $("#gallery").empty();
+            addImgages(50);
+        })
+    }
+    selectChange();
 	
 	
 });
