@@ -6,8 +6,10 @@ $(document).ready(function() {
     // fetch data - max at once is 30
     const addImages = (per_page) => {
         page += 1;
+        console.log(page)
         const selectedValue = $("#select-view option:selected" ).text();
-        $.get(`https://api.unsplash.com/search/photos?query=${selectedValue}&page=${page}&per_page=${per_page}&client_id=c951c92d1564486e8f5adc62ca1fe0f9b05da1800d121fdf1ec049363936cd4c`)
+        // $.get(`https://api.unsplash.com/search/photos?query=${selectedValue}&page=${page}&per_page=${per_page}&client_id=c951c92d1564486e8f5adc62ca1fe0f9b05da1800d121fdf1ec049363936cd4c`)
+        $.get(`https://api.unsplash.com/search/photos?query=people&page=${page}&per_page=${per_page}&client_id=c951c92d1564486e8f5adc62ca1fe0f9b05da1800d121fdf1ec049363936cd4c`)
         .done(function(resp) {
             for (let i=0; i< resp.results.length; i++) {
                 const image = resp.results[i];
@@ -36,7 +38,7 @@ $(document).ready(function() {
         if($(window).scrollTop() + $(window).height() >= $(document).height() - ($(document).height()*0.1)) {
             if (canLoadImages) {
                 canLoadImages = false;
-                addImages(20);
+                addImages(30);
             }
         } else {
             canLoadImages = true;
@@ -99,7 +101,7 @@ $(document).ready(function() {
                     if($(window).scrollTop() + $(window).height() === $(document).height()) {
                         $(window).off("scroll", scrollToBottom);
                         addScrollListener();
-                        addImages(20);
+                        addImages(30);
                     }
                     if (scrollNow > lastScrollTop) {
                         $("header").removeClass("sticky");
@@ -120,7 +122,6 @@ $(document).ready(function() {
         $("#gallery").click(function(e) {
             if ($(window).width() >= 600) {
                 const largerImg = $(e.target).attr("data-larger-img");
-                console.log(largerImg);
                 $("#larger-img").empty();
                 $("#larger-img").append("<img src='"+largerImg+"'/><div id='close-image'>X</div>");
             }
@@ -131,7 +132,6 @@ $(document).ready(function() {
     // hide larger image
     const hideLargerImg = () => {
         $("#larger-img").click(function() {
-            console.log('close')
             $("#larger-img").empty();
         })
     }
