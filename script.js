@@ -11,7 +11,8 @@ $(document).ready(function() {
         .done(function(resp) {
             for (let i=0; i< resp.results.length; i++) {
                 const image = resp.results[i];
-                $("#gallery").append("<div class='image-container'> <img src='"+image.urls.small+"' alt='+image-"+image.id+"'/> </div>");
+                const addElement = "<div class='image-container'> <img src='"+image.urls.small+"' id="+image.id+"' alt='image-"+image.id+"' data-larger-img='"+image.urls.regular+"'/> </div>";
+                $("#gallery").append(addElement);
             }
         })
         .fail(function() {
@@ -114,5 +115,26 @@ $(document).ready(function() {
     }
     scrollDown();
 	
-	
+    // show larger image when user cliced on image in gallery
+	const showLargerImg = () => {
+        $("#gallery").click(function(e) {
+            if ($(window).width() >= 600) {
+                const largerImg = $(e.target).attr("data-larger-img");
+                console.log(largerImg);
+                $("#larger-img").empty();
+                $("#larger-img").append("<img src='"+largerImg+"'/><div id='close-image'>X</div>");
+            }
+        })
+    }
+    showLargerImg();
+
+    // hide larger image
+    const hideLargerImg = () => {
+        $("#larger-img").click(function() {
+            console.log('close')
+            $("#larger-img").empty();
+        })
+    }
+    hideLargerImg();
+
 });
