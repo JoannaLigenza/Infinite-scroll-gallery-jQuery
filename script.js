@@ -8,8 +8,7 @@ $(document).ready(function() {
         page += 1;
         console.log(page)
         const selectedValue = $("#select-view option:selected" ).text();
-        // $.get(`https://api.unsplash.com/search/photos?query=${selectedValue}&page=${page}&per_page=${per_page}&client_id=c951c92d1564486e8f5adc62ca1fe0f9b05da1800d121fdf1ec049363936cd4c`)
-        $.get(`https://api.unsplash.com/search/photos?query=people&page=${page}&per_page=${per_page}&client_id=c951c92d1564486e8f5adc62ca1fe0f9b05da1800d121fdf1ec049363936cd4c`)
+        $.get(`https://api.unsplash.com/search/photos?query=${selectedValue}&page=${page}&per_page=${per_page}&client_id=c951c92d1564486e8f5adc62ca1fe0f9b05da1800d121fdf1ec049363936cd4c`)
         .done(function(resp) {
             for (let i=0; i< resp.results.length; i++) {
                 const image = resp.results[i];
@@ -120,7 +119,7 @@ $(document).ready(function() {
     // show larger image when user cliced on image in gallery
 	const showLargerImg = () => {
         $("#gallery").click(function(e) {
-            if ($(window).width() >= 600) {
+            if ($(window).width() >= 700) {
                 const largerImg = $(e.target).attr("data-larger-img");
                 $("#larger-img").empty();
                 $("#larger-img").append("<img src='"+largerImg+"'/><div id='close-image'>X</div>");
