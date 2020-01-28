@@ -1,10 +1,9 @@
 $(document).ready(function() {
-	console.log("works");
-
     let page = 0;
     let canLoadImages = true;
     let lastScrollTop = 0;
 
+    // fetch data - max at once is 30
     const addImages = (per_page) => {
         page += 1;
         const selectedValue = $("#select-view option:selected" ).text();
@@ -16,11 +15,10 @@ $(document).ready(function() {
             }
         })
         .fail(function() {
-            // console.log('connection error');
             $("#gallery").empty().append('<p>Too many connections. Please try again after 5 minutes</p>');
         })
         .always(function() {
-            // console.log('always')
+            //
         });
     }
     addImages(30);      
@@ -36,8 +34,8 @@ $(document).ready(function() {
         const scrollNow = $(document).scrollTop();
         if($(window).scrollTop() + $(window).height() >= $(document).height() - ($(document).height()*0.1)) {
             if (canLoadImages) {
-                addImages(10);
                 canLoadImages = false;
+                addImages(20);
             }
         } else {
             canLoadImages = true;
@@ -82,11 +80,14 @@ $(document).ready(function() {
     // automatically scroll to bottom of gallery
     const scrollDown = () => {
         $('.arrow-down').click(() => {
+            // disable handle scroll listener
             removeScrollListener();
             $(window).off("scroll")
+            // load next 90 images
             addImages(30);
             addImages(30);
             addImages(30);
+            // scroll down (with animate effect) after 0.5s after clicking scroll down button
             setTimeout(animateScrollDown, 500);
             function animateScrollDown() {
                 $('html, body').animate({
@@ -97,7 +98,7 @@ $(document).ready(function() {
                     if($(window).scrollTop() + $(window).height() === $(document).height()) {
                         $(window).off("scroll", scrollToBottom);
                         addScrollListener();
-                        addImages(10);
+                        addImages(20);
                     }
                     if (scrollNow > lastScrollTop) {
                         $("header").removeClass("sticky");
@@ -106,6 +107,7 @@ $(document).ready(function() {
                     }
                     lastScrollTop = scrollNow;
                 }
+                // add new listener - after gallery has scrolled to bottom, detect if user scrolls manually to bottom of page and then add handle scroll listener again
                 $(window).on("scroll", scrollToBottom);
             }
         });
